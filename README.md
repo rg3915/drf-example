@@ -7,7 +7,7 @@ Django REST framework exemplos e testes.
 
 * [Python 3.9.6](https://www.python.org/)
 * [Django 3.2.6](https://www.djangoproject.com/)
-* [Django Rest Framework 3.11.1](https://www.django-rest-framework.org/)
+* [Django Rest Framework 3.12.4](https://www.django-rest-framework.org/)
 
 ## Como rodar o projeto?
 
