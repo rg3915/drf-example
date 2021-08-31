@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # 3rd apps
     'rest_framework',
     'dr_scaffold',
+    'drf_yasg',
     # my apps
     'blog',
     'product',
