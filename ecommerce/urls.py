@@ -6,7 +6,6 @@ from django.urls import include, path
 router = routers.DefaultRouter()
 
 router.register(r'orders', OrderViewSet)
-
 router.register(r'orderitem', OrderItemsViewSet)
 
 urlpatterns = [

@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'dr_scaffold',
     # my apps
     'blog',
+    'product',
+    'ecommerce',
 ]
 
 MIDDLEWARE = [
