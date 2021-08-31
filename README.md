@@ -23,6 +23,7 @@ cd drf-example
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
+python contrib/env_gen.py
 python manage.py migrate
 python manage.py createsuperuser --username="admin" --email=""
 ```
@@ -42,8 +43,17 @@ dr-scaffold é uma lib para criar models e uma API simples em Django REST framew
 ```
 python -m venv .venv
 source .venv/bin/activate
-pip install dr-scaffold djangorestframework
+pip install dr-scaffold djangorestframework django-extensions python-decouple
 ```
+
+Crie um arquivo `.env`
+
+```
+cat << EOF > .env
+SECRET_KEY=my-super-secret-key-dev-only
+EOF
+```
+
 
 Crie um novo projeto.
 
@@ -55,6 +65,11 @@ Edite `settings.py`
 
 ```python
 # settings.py
+
+from decouple import config
+
+SECRET_KEY = config('SECRET_KEY')
+
 INSTALLED_APPS = [
     ...
     'rest_framework',
