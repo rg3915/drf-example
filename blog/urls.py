@@ -6,7 +6,6 @@ from django.urls import include, path
 router = routers.DefaultRouter()
 
 router.register(r'authors', AuthorViewSet)
-
 router.register(r'posts', PostViewSet)
 
 urlpatterns = [

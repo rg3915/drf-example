@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     # 3rd apps
     'rest_framework',
     'dr_scaffold',
+    # my apps
+    'blog',
 ]
 
 MIDDLEWARE = [
