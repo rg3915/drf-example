@@ -157,6 +157,12 @@ path('ecommerce/', include('ecommerce.urls')),
 ...
 ```
 
+Não se esqueça de editar `ecommerce/models.py`
+
+```python
+from product.models import Product
+```
+
 ```
 python manage.py makemigrations
 python manage.py migrate
