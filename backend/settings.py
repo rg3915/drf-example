@@ -40,13 +40,25 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 3rd apps
     'rest_framework',
+    'rest_framework.authtoken',
+    'django_extensions',
     'dr_scaffold',
     'drf_yasg',
+    'djoser',
     # my apps
     'blog',
     'product',
     'ecommerce',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    )
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
