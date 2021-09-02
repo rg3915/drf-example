@@ -32,7 +32,7 @@ python manage.py createsuperuser --username="admin" --email=""
 
 * [dr-scaffold](#dr-scaffold)
 * [drf-yasg - Yet another Swagger generator](#drf-yasg---yet-another-swagger-generator)
-
+* [djoser](#djoser)
 
 ## dr-scaffold
 
@@ -236,3 +236,65 @@ urlpatterns += [
 ]
 ```
 
+## djoser
+
+https://djoser.readthedocs.io/en/latest/
+
+```
+pip install -U djoser
+pip freeze | grep djoser >> requirements.txt
+```
+
+
+
+Configure `INSTALLED_APPS`
+
+```python
+INSTALLED_APPS = (
+    'django.contrib.auth',
+    (...),
+    'rest_framework',
+    'rest_framework.authtoken',  # <-- rode ./manage.py migrate
+    'djoser',  # <--
+    (...),
+)
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    )
+}
+
+```
+
+Configure `urls.py`
+
+```python
+# djoser
+urlpatterns += [
+    path('api/v1/', include('djoser.urls')),
+    path('api/v1/', include('djoser.urls.authtoken')),
+]
+```
+
+
+```
+python manage.py migrate
+python manage.py drf_create_token admin
+
+token d7643a4710c7e19915df7d5e3d82f70cb07998ba
+```
+
+
+
+
+```
+curl -X POST http://127.0.0.1:8000/api/v1/users/ --data 'username=djoser&password=api127rg'
+
+curl -X POST http://127.0.0.1:8000/api/v1/token/login/ --data 'username=admin&password=d'
+
+curl -X GET http://127.0.0.1:8000/api/v1/users/me/ -H 'Authorization: Token d7643a4710c7e19915df7d5e3d82f70cb07998ba'
+```
