@@ -294,7 +294,7 @@ token d7643a4710c7e19915df7d5e3d82f70cb07998ba
 ```
 curl -X POST http://127.0.0.1:8000/api/v1/users/ --data 'username=djoser&password=api127rg'
 
-curl -X POST http://127.0.0.1:8000/api/v1/token/login/ --data 'username=admin&password=d'
+curl -X POST http://127.0.0.1:8000/api/v1/auth/token/login/ --data 'username=admin&password=d'
 
 curl -X GET http://127.0.0.1:8000/api/v1/users/me/ -H 'Authorization: Token d7643a4710c7e19915df7d5e3d82f70cb07998ba'
 ```
