@@ -167,6 +167,7 @@ Não se esqueça de editar `ecommerce/models.py`
 
 ```python
 from product.models import Product
+
 ```
 
 ```

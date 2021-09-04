@@ -1,8 +1,7 @@
-from ecommerce.models import OrderItems
-from ecommerce.serializers import OrderItemsSerializer
-from ecommerce.models import Order
-from ecommerce.serializers import OrderSerializer
 from rest_framework import viewsets
+
+from ecommerce.models import Order, OrderItems
+from ecommerce.serializers import OrderItemsSerializer, OrderSerializer
 
 
 class OrderViewSet(viewsets.ModelViewSet):

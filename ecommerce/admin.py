@@ -1,6 +1,6 @@
-from ecommerce.models import OrderItems
-from ecommerce.models import Order
 from django.contrib import admin
+
+from ecommerce.models import Order, OrderItems
 
 
 @admin.register(Order)

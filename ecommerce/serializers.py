@@ -1,6 +1,6 @@
-from ecommerce.models import OrderItems
-from ecommerce.models import Order
 from rest_framework import serializers
+
+from ecommerce.models import Order, OrderItems
 
 
 class OrderSerializer(serializers.HyperlinkedModelSerializer):

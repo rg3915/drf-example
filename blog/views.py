@@ -1,8 +1,7 @@
-from blog.models import Post
-from blog.serializers import PostSerializer
-from blog.models import Author
-from blog.serializers import AuthorSerializer
 from rest_framework import viewsets
+
+from blog.models import Author, Post
+from blog.serializers import AuthorSerializer, PostSerializer
 
 
 class AuthorViewSet(viewsets.ModelViewSet):

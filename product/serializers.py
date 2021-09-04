@@ -1,5 +1,6 @@
-from product.models import Product
 from rest_framework import serializers
+
+from product.models import Product
 
 
 class ProductSerializer(serializers.HyperlinkedModelSerializer):

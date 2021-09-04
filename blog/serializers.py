@@ -1,6 +1,6 @@
-from blog.models import Post
-from blog.models import Author
 from rest_framework import serializers
+
+from blog.models import Author, Post
 
 
 class AuthorSerializer(serializers.HyperlinkedModelSerializer):

@@ -1,7 +1,7 @@
-from ecommerce.views import OrderItemsViewSet
-from ecommerce.views import OrderViewSet
-from rest_framework import routers
 from django.urls import include, path
+from rest_framework import routers
+
+from ecommerce.views import OrderItemsViewSet, OrderViewSet
 
 router = routers.DefaultRouter()
 
