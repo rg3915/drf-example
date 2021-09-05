@@ -53,19 +53,46 @@ def fetch(session, endpoint, access_token):
         return response.json()
 
 
+def post_product(session, endpoint, access_token, title, price):
+    '''
+    Salva o produto.
+    '''
+    headers = {'Authorization': f'Bearer {access_token}'}
+    # with session.post(endpoint, headers=headers) as response:
+    #     return response.json()
+    data = {
+        'title': title,
+        'price': price,
+    }
+    with session.post(
+        endpoint,
+        # auth=HTTPBasicAuth(username, password),
+        headers=headers,
+        data=data
+    ) as response:
+        print(response)
+        pprint(response.json())
+
+
 @click.command()
 @click.option('--username', '-u', prompt='username', help='Type the username.')
 @click.option('--password', '-p', prompt='password', help='Type the password.')
-def main(username, password):
+@click.option('--title', '-t', help='Type the title.')
+@click.option('--price', '-pr', help='Type the price.')
+def main(username, password, title=None, price=None):
     '''
     Consumindo a lista de produtos.
     '''
     token = get_token(username, password)
     access_token = token['access_token']
     with requests.Session() as session:
-        endpoint = f'http://127.0.0.1:8000/product/products/'
+        endpoint = 'http://127.0.0.1:8000/product/products/'
         response = fetch(session, endpoint, access_token)
         pprint(response)
+
+        if title and price:
+            print(f'Salvando produto: {title}')
+            post_product(session, endpoint, access_token, title, price)
 
 
 if __name__ == '__main__':
