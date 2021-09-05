@@ -1,3 +1,8 @@
+'''
+Usage:
+
+python consumer.py -u usuario -p senha
+'''
 from pprint import pprint
 from typing import Dict
 
@@ -61,9 +66,8 @@ def main(username, password):
         endpoint = f'http://127.0.0.1:8000/product/products/'
         response = fetch(session, endpoint, access_token)
         pprint(response)
-        return response
 
 
 if __name__ == '__main__':
     print('Produtos')
-    pprint(main())
+    main()
