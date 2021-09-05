@@ -31,7 +31,7 @@ def fetch_token(session, endpoint, username, password):
         return response.json()
 
 
-def get_token(username, password) -> Dict[str, str]:
+def get_token(username: str, password: str) -> Dict[str, str]:
     '''
     Pega o access_token do usuário logado.
     '''
@@ -58,18 +58,11 @@ def post_product(session, endpoint, access_token, title, price):
     Salva o produto.
     '''
     headers = {'Authorization': f'Bearer {access_token}'}
-    # with session.post(endpoint, headers=headers) as response:
-    #     return response.json()
     data = {
         'title': title,
         'price': price,
     }
-    with session.post(
-        endpoint,
-        # auth=HTTPBasicAuth(username, password),
-        headers=headers,
-        data=data
-    ) as response:
+    with session.post(endpoint, headers=headers, data=data) as response:
         print(response)
         pprint(response.json())
 
