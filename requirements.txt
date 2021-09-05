@@ -1,6 +1,8 @@
-Django==3.2.6
-djangorestframework==3.12.4
-dr-scaffold==1.4.3
-drf-yasg==1.20.0
-djoser==2.1.0
-click==8.0.1
+Django==3.2.*
+djangorestframework==3.12.*
+dr-scaffold==1.4.*
+drf-yasg==1.20.*
+djoser==2.1.*
+click==8.0.*
+python-decouple
+django-extensions
