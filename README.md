@@ -290,8 +290,9 @@ python manage.py drf_create_token admin
 token d7643a4710c7e19915df7d5e3d82f70cb07998ba  # o seu será um novo
 ```
 
+Veja no video como rodar no **Postman** e no **Swagger**.
 
-
+Exemplos com curl
 
 ```
 # Cria novo usuário
@@ -302,7 +303,6 @@ curl -X POST http://127.0.0.1:8000/api/v1/auth/token/login/ --data 'username=djo
 
 # Informações do usuário
 curl -X GET http://127.0.0.1:8000/api/v1/users/me/ -H 'Authorization: Token d7643a4710c7e19915df7d5e3d82f70cb07998ba'  # o seu será um novo
-```
 
 # Logout
 curl -X GET http://127.0.0.1:8000/api/v1/auth/token/logout/ -H 'Authorization: Token d7643a4710c7e19915df7d5e3d82f70cb07998ba'  # o seu será um novo
