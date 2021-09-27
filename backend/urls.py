@@ -29,7 +29,6 @@ urlpatterns = [
 urlpatterns += [
     path('api/v1/', include('djoser.urls')),
     path('api/v1/auth/', include('djoser.urls.authtoken')),
-    path('api/v1/auth/', include('djoser.urls.jwt')),
 ]
 
 # swagger

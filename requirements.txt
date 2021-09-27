@@ -1,8 +1,8 @@
+click==8.0.*
+django-extensions
 Django==3.2.*
 djangorestframework==3.12.*
+djoser==2.1.*
 dr-scaffold==1.4.*
 drf-yasg==1.20.*
-djoser==2.1.*
-click==8.0.*
 python-decouple
-django-extensions

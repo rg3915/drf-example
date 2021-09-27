@@ -262,6 +262,7 @@ INSTALLED_APPS = (
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.TokenAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': (
@@ -286,16 +287,25 @@ urlpatterns += [
 python manage.py migrate
 python manage.py drf_create_token admin
 
-token d7643a4710c7e19915df7d5e3d82f70cb07998ba
+token d7643a4710c7e19915df7d5e3d82f70cb07998ba  # o seu será um novo
 ```
 
 
 
 
 ```
+# Cria novo usuário
 curl -X POST http://127.0.0.1:8000/api/v1/users/ --data 'username=djoser&password=api127rg'
 
-curl -X POST http://127.0.0.1:8000/api/v1/auth/token/login/ --data 'username=admin&password=d'
+# Login
+curl -X POST http://127.0.0.1:8000/api/v1/auth/token/login/ --data 'username=djoser&password=api127rg'
 
-curl -X GET http://127.0.0.1:8000/api/v1/users/me/ -H 'Authorization: Token d7643a4710c7e19915df7d5e3d82f70cb07998ba'
+# Informações do usuário
+curl -X GET http://127.0.0.1:8000/api/v1/users/me/ -H 'Authorization: Token d7643a4710c7e19915df7d5e3d82f70cb07998ba'  # o seu será um novo
 ```
+
+# Logout
+curl -X GET http://127.0.0.1:8000/api/v1/auth/token/logout/ -H 'Authorization: Token d7643a4710c7e19915df7d5e3d82f70cb07998ba'  # o seu será um novo
+```
+
+Quando faz o logout ele apaga o token, e só gera um novo quando você fizer login novamente.
