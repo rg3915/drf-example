@@ -34,6 +34,7 @@ python manage.py createsuperuser --username="admin" --email=""
 * [drf-yasg - Yet another Swagger generator](#drf-yasg---yet-another-swagger-generator)
 * [djoser](#djoser)
 * [Reset de Senha com djoser](#reset-de-senha-com-djoser)
+* [Autenticação via JWT com djoser]()
 
 ## dr-scaffold
 
