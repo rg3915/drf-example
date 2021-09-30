@@ -34,7 +34,7 @@ python manage.py createsuperuser --username="admin" --email=""
 * [drf-yasg - Yet another Swagger generator](#drf-yasg---yet-another-swagger-generator)
 * [djoser](#djoser)
 * [Reset de Senha com djoser](#reset-de-senha-com-djoser)
-* [Autenticação via JWT com djoser]()
+* [Autenticação via JWT com djoser](#autenticação-via-jwt-com-djoser)
 
 ## dr-scaffold
 
@@ -483,6 +483,8 @@ https://djoser.readthedocs.io/en/latest/jwt_endpoints.html
 
 
 `pip install djoser djangorestframework-simplejwt`
+
+![jwt.png](jwt.png)
 
 
 ```python
