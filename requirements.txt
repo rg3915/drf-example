@@ -6,3 +6,4 @@ djoser==2.1.*
 dr-scaffold==1.4.*
 drf-yasg==1.20.*
 python-decouple
+djangorestframework-simplejwt==4.8.0
