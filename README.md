@@ -35,6 +35,7 @@ python manage.py createsuperuser --username="admin" --email=""
 * [djoser](#djoser)
 * [Reset de Senha com djoser](#reset-de-senha-com-djoser)
 * [Autenticação via JWT com djoser](#autenticação-via-jwt-com-djoser)
+* [Django CORS headers](#django-cors-headers)
 
 ## dr-scaffold
 
@@ -655,3 +656,43 @@ if __name__ == '__main__':
 
 ```
 
+## Django CORS headers
+
+https://pt.wikipedia.org/wiki/Cross-origin_resource_sharing
+
+https://github.com/adamchainz/django-cors-headers
+
+
+```
+python -m pip install django-cors-headers
+pip freeze | grep django-cors-headers >> requirements.txt
+```
+
+
+Edite `settings.py`
+
+```python
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:8080',
+]
+
+INSTALLED_APPS = [
+    ...,
+    'corsheaders',
+    ...,
+]
+
+MIDDLEWARE = [
+    ...,
+    # corsheaders
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    ...,
+]
+
+```
+
+```
+# Se necessário
+python manage.py drf_create_token huguinho
+```
