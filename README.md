@@ -36,7 +36,7 @@ python manage.py createsuperuser --username="admin" --email=""
 * [Reset de Senha com djoser](#reset-de-senha-com-djoser)
 * [Autenticação via JWT com djoser](#autenticação-via-jwt-com-djoser)
 * [Django CORS headers](#django-cors-headers)
-* [Paginação](#paginacao)
+* [Paginação](#paginação)
 
 ## dr-scaffold
 
