@@ -8,3 +8,4 @@ drf-yasg==1.20.*
 python-decouple
 djangorestframework-simplejwt==4.8.0
 django-cors-headers==3.8.0
+django-filter==21.1

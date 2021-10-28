@@ -5,9 +5,9 @@ from blog.models import Author, Post
 
 @admin.register(Author)
 class AuthorAdmin(admin.ModelAdmin):
-    exclude = ()
+    list_display = ('__str__',)
 
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    exclude = ()
+    list_display = ('title', 'author', 'created_by')
