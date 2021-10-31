@@ -11,4 +11,4 @@ class AuthorAdmin(admin.ModelAdmin):
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
     list_display = ('title', 'author', 'created_by', 'like')
-    filter_list = ('like',)
+    list_filter = ('like',)
