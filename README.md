@@ -38,7 +38,7 @@ python manage.py createsuperuser --username="admin" --email=""
 * [Django CORS headers](#django-cors-headers)
 * [Paginação](#paginação)
 * [django-filter](#django-filter)
-* [Criando subrota com action]()
+* [Criando subrota com action](#criando-subrota-com-action)
 
 ## dr-scaffold
 
