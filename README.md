@@ -1344,5 +1344,8 @@ class PostAdmin(admin.ModelAdmin):
 
 As novas rotas são:
 
-???
-
+```
+/blog/posts/<pk>/like/
+/blog/posts/<pk>/unlike/
+/blog/posts/my_posts/
+```
