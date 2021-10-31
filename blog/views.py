@@ -1,6 +1,8 @@
 from rest_framework import viewsets
+from rest_framework.decorators import action
 from rest_framework.filters import SearchFilter
 from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.response import Response
 
 from blog.filters import PostFilter
 from blog.models import Author, Post
@@ -37,3 +39,42 @@ class PostViewSet(viewsets.ModelViewSet):
     #     if username:
     #         queryset = queryset.filter(created_by__username=username)
     #     return queryset
+
+    @action(detail=True, methods=['put'])
+    def like(self, request, pk=None):
+        '''
+        Marca Like = True
+        '''
+        post_obj = self.get_object()
+        post_obj.like = True
+        post_obj.save()
+        serializer = self.get_serializer(post_obj)
+        return Response(serializer.data)
+
+    @action(detail=True, methods=['put'])
+    def unlike(self, request, pk=None):
+        '''
+        Marca Like = False
+        '''
+        post_obj = self.get_object()
+        post_obj.like = False
+        post_obj.save()
+        serializer = self.get_serializer(post_obj)
+        return Response(serializer.data)
+
+    @action(detail=False, methods=['get'])
+    def my_posts(self, request, pk=None):
+        '''
+        Retorna somente os meus posts.
+        '''
+        user = self.request.user
+        # posts = Post.objects.filter(created_by=user)
+        posts = self.get_queryset().filter(created_by=user)
+
+        page = self.paginate_queryset(posts)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = self.get_serializer(posts, many=True)
+        return Response(serializer.data)
