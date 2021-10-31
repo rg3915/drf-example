@@ -27,6 +27,7 @@ class Post(models.Model):
         verbose_name='criado por',
         null=True
     )
+    like = models.BooleanField(null=True)
     created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
