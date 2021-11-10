@@ -3,7 +3,7 @@ django-extensions
 Django==3.2.*
 djangorestframework==3.12.*
 djoser==2.1.*
-dr-scaffold==1.4.*
+dr-scaffold==2.1.*
 drf-yasg==1.20.*
 python-decouple
 djangorestframework-simplejwt==4.8.0
