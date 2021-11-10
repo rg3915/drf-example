@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'blog',
     'product',
     'ecommerce',
+    'movie',
 ]
 
 REST_FRAMEWORK = {

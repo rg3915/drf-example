@@ -22,6 +22,7 @@ urlpatterns = [
     path('blog/', include('blog.urls')),
     path('product/', include('product.urls')),
     path('ecommerce/', include('ecommerce.urls')),
+    path('movie/', include('movie.urls')),
     path('admin/', admin.site.urls),
 ]
 
