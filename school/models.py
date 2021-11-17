@@ -2,6 +2,7 @@ from django.db import models
 
 
 class Student(models.Model):
+    registration = models.CharField(max_length=7)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
 

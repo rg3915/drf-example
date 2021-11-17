@@ -10,11 +10,23 @@ class StudentSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class StudentRegistrationSerializer(serializers.BaseSerializer):
+
+    class Meta:
+        model = Student
+
+    def to_representation(self, instance):
+        return {
+            'registration': instance.registration.zfill(7),
+            'full_name': instance.__str__()
+        }
+
+
 class ClassroomSerializer(serializers.ModelSerializer):
     # student = StudentSerializer(many=True)
-    # student = serializers.ListSerializer(child=StudentSerializer())
+    student = serializers.ListSerializer(child=StudentSerializer())
 
     class Meta:
         model = Classroom
         fields = '__all__'
-        depth = 1
+        # depth = 1
