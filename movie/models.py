@@ -23,7 +23,7 @@ class Movie(models.Model):
 
 
 class Category(models.Model):
-    title = models.CharField(max_length=30, unique=True)
+    title = models.CharField(max_length=30)  # Remova unique=True
 
     class Meta:
         verbose_name_plural = "Categories"

@@ -3,33 +3,39 @@ from rest_framework import serializers
 from movie.models import Category, Movie
 
 
-class CategorySerializer(serializers.Serializer):
-    id = serializers.IntegerField(read_only=True)
-    title = serializers.CharField(max_length=30)
+# class CategorySerializer(serializers.Serializer):
+#     id = serializers.IntegerField(read_only=True)
+#     title = serializers.CharField(max_length=30)
 
-    def create(self, validated_data):
-        """
-        Create and return a new `Movie` instance, given the validated data.
-        :param validated_data:
-        """
-        return Category.objects.create(**validated_data)
+#     def create(self, validated_data):
+#         """
+#         Create and return a new `Movie` instance, given the validated data.
+#         :param validated_data:
+#         """
+#         return Category.objects.create(**validated_data)
 
-    def update(self, instance, validated_data):
-        """
-        Update and return an existing `Movie` instance, given the validated data.
-        """
-        instance.title = validated_data.get('title', instance.title)
-        instance.save()
-        return instance
+#     def update(self, instance, validated_data):
+#         """
+#         Update and return an existing `Movie` instance, given the validated data.
+#         """
+#         instance.title = validated_data.get('title', instance.title)
+#         instance.save()
+#         return instance
 
 
-class MovieSerializer(serializers.Serializer):
-    id = serializers.IntegerField(read_only=True)
-    title = serializers.CharField(max_length=30)
-    sinopse = serializers.CharField(max_length=255)
-    rating = serializers.IntegerField()
-    like = serializers.BooleanField(default=False)
+class CategorySerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Category
+        fields = ('id', 'title')
+
+
+class MovieSerializer(serializers.ModelSerializer):
     category = CategorySerializer(required=False)
+
+    class Meta:
+        model = Movie
+        fields = ('id', 'title', 'sinopse', 'rating', 'like', 'category')
 
     def create(self, validated_data):
         """
@@ -41,7 +47,7 @@ class MovieSerializer(serializers.Serializer):
             category_data = validated_data.pop('category')
 
         if category_data:
-            category = Category.objects.create(**category_data)
+            category, _ = Category.objects.get_or_create(**category_data)
             movie = Movie.objects.create(category=category, **validated_data)
         else:
             movie = Movie.objects.create(**validated_data)
