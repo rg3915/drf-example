@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'product',
     'ecommerce',
     'movie',
+    'school',
 ]
 
 REST_FRAMEWORK = {
