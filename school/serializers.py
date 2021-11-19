@@ -23,8 +23,8 @@ class StudentRegistrationSerializer(serializers.BaseSerializer):
 
 
 class ClassroomSerializer(serializers.ModelSerializer):
-    # student = StudentSerializer(many=True)
-    student = serializers.ListSerializer(child=StudentSerializer())
+    # students = StudentSerializer(many=True)
+    students = serializers.ListSerializer(child=StudentSerializer())
 
     class Meta:
         model = Classroom

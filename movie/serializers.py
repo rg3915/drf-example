@@ -8,14 +8,16 @@ from movie.models import Category, Movie
 
 #     def create(self, validated_data):
 #         """
-#         Create and return a new `Movie` instance, given the validated data.
+#         Create and return a new `Category` instance, given the validated data.
+#         Cria e retorna uma nova instância `Category`, de acordo com os dados validados.
 #         :param validated_data:
 #         """
 #         return Category.objects.create(**validated_data)
 
 #     def update(self, instance, validated_data):
 #         """
-#         Update and return an existing `Movie` instance, given the validated data.
+#         Update and return an existing `Category` instance, given the validated data.
+#         Atualiza e retorna uma instância `Category` existente, de acordo com os dados validados.
 #         """
 #         instance.title = validated_data.get('title', instance.title)
 #         instance.save()
@@ -39,6 +41,7 @@ class MovieSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         """
         Create and return a new `Movie` instance, given the validated data.
+        Cria e retorna uma nova instância `Movie`, de acordo com os dados validados.
         :param validated_data:
         """
         category_data = {}
@@ -56,6 +59,7 @@ class MovieSerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
         """
         Update and return an existing `Movie` instance, given the validated data.
+        Atualiza e retorna uma instância `Movie` existente, de acordo com os dados validados.
         """
         if 'category' in validated_data:
             category_data = validated_data.pop('category')

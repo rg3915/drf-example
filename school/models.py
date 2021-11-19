@@ -16,7 +16,7 @@ class Student(models.Model):
 
 class Classroom(models.Model):
     title = models.CharField(max_length=30)
-    student = models.ManyToManyField(Student)
+    students = models.ManyToManyField(Student)
 
     def __str__(self):
         return f"{self.title}"
