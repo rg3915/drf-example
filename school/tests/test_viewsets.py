@@ -53,10 +53,10 @@ class ViewSetTest(TestCase):
             content_type='application/json'
         )
         esperado = {
-            'id': 1,
-            'registration': '1',
-            'first_name': 'Regis',
-            'last_name': 'Santos'
+            "id": 1,
+            "registration": "1",
+            "first_name": "Regis",
+            "last_name": "Santos"
         }
         resultado = json.loads(response.content)
         self.assertEqual(esperado, resultado)
