@@ -1,10 +1,15 @@
 from django.shortcuts import get_object_or_404
-from rest_framework import status, viewsets
+from rest_framework import generics, status, viewsets
 from rest_framework.decorators import action
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
-from school.models import Student
-from school.serializers import StudentRegistrationSerializer, StudentSerializer
+from school.models import Classroom, Student
+from school.serializers import (
+    ClassroomSerializer,
+    StudentRegistrationSerializer,
+    StudentSerializer
+)
 
 
 class StudentViewSet(viewsets.ViewSet):
@@ -72,3 +77,9 @@ class StudentViewSet(viewsets.ViewSet):
         queryset = Student.objects.all()
         serializer = StudentRegistrationSerializer(queryset, many=True)
         return Response(serializer.data)
+
+
+class ClassroomSerializer(generics.ListCreateAPIView):
+    queryset = Classroom.objects.all()
+    serializer_class = ClassroomSerializer
+    permission_classes = (AllowAny,)
