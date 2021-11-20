@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from school.models import Classroom, Student
+from school.models import Classroom, Grade, Student
 
 
 class StudentSerializer(serializers.ModelSerializer):
@@ -30,3 +30,10 @@ class ClassroomSerializer(serializers.ModelSerializer):
         model = Classroom
         fields = '__all__'
         # depth = 1
+
+
+class GradeSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Grade
+        fields = '__all__'

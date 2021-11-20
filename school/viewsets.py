@@ -4,9 +4,10 @@ from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
-from school.models import Classroom, Student
+from school.models import Classroom, Grade, Student
 from school.serializers import (
     ClassroomSerializer,
+    GradeSerializer,
     StudentRegistrationSerializer,
     StudentSerializer
 )
@@ -79,7 +80,19 @@ class StudentViewSet(viewsets.ViewSet):
         return Response(serializer.data)
 
 
-class ClassroomSerializer(generics.ListCreateAPIView):
+# class ClassroomSerializer(generics.ListCreateAPIView):
+#     queryset = Classroom.objects.all()
+#     serializer_class = ClassroomSerializer
+#     permission_classes = (AllowAny,)
+
+
+class ClassroomSerializer(viewsets.ModelViewSet):
     queryset = Classroom.objects.all()
     serializer_class = ClassroomSerializer
+    permission_classes = (AllowAny,)
+
+
+class GradeViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Grade.objects.all()
+    serializer_class = GradeSerializer
     permission_classes = (AllowAny,)
