@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from school.models import Classroom, Grade, Student
+from school.models import Class, Classroom, Grade, Student
 
 
 class StudentSerializer(serializers.ModelSerializer):
@@ -8,6 +8,13 @@ class StudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
         fields = '__all__'
+
+
+class StudentUpdateSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Student
+        fields = ('first_name', 'last_name')
 
 
 class StudentRegistrationSerializer(serializers.BaseSerializer):
@@ -37,3 +44,18 @@ class GradeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Grade
         fields = '__all__'
+
+
+class ClassSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Class
+        fields = '__all__'
+        # depth = 1  # com ele você não consegue fazer um POST direto pelo browser do Django.
+
+
+class ClassAddSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Class
+        fields = ('classroom',)

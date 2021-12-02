@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from school.models import Classroom, Grade, Student
+from school.models import Class, Classroom, Grade, Student
 
 
 @admin.register(Student)
@@ -15,4 +15,9 @@ class ClassroomAdmin(admin.ModelAdmin):
 
 @admin.register(Grade)
 class GradeAdmin(admin.ModelAdmin):
+    exclude = ()
+
+
+@admin.register(Class)
+class ClassAdmin(admin.ModelAdmin):
     exclude = ()

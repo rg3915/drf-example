@@ -1,15 +1,20 @@
+from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 from rest_framework import generics, status, viewsets
 from rest_framework.decorators import action
+from rest_framework.exceptions import ValidationError as DRFValidationError
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
-from school.models import Classroom, Grade, Student
+from school.models import Class, Classroom, Grade, Student
 from school.serializers import (
+    ClassAddSerializer,
     ClassroomSerializer,
+    ClassSerializer,
     GradeSerializer,
     StudentRegistrationSerializer,
-    StudentSerializer
+    StudentSerializer,
+    StudentUpdateSerializer
 )
 
 
@@ -19,7 +24,17 @@ class StudentViewSet(viewsets.ViewSet):
     Uma ViewSet simples para listar ou recuperar alunos.
     """
 
+    # def get_serializer_class(self):
+    #     return StudentSerializer
+
     def get_serializer_class(self):
+        # Muda o serializer dependendo da ação.
+        if self.action == 'create':
+            return StudentSerializer
+
+        if self.action == 'update':
+            return StudentUpdateSerializer
+
         return StudentSerializer
 
     def get_serializer(self, *args, **kwargs):
@@ -96,3 +111,99 @@ class GradeViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Grade.objects.all()
     serializer_class = GradeSerializer
     permission_classes = (AllowAny,)
+
+
+class ClassViewSet(viewsets.ModelViewSet):
+    queryset = Class.objects.all()
+    # serializer_class = ClassSerializer
+    permission_classes = (AllowAny,)
+
+    # def list(self, request, *args, **kwargs):
+    #     user = self.request.user
+    #     teacher = User.objects.get(username=user)
+
+    #     if user is not None:
+    #         queryset = Class.objects.filter(teacher=teacher)
+    #     else:
+    #         queryset = Class.objects.none()
+
+    #     page = self.paginate_queryset(queryset)
+    #     if page is not None:
+    #         serializer = self.get_serializer(page, many=True)
+    #         return self.get_paginated_response(serializer.data)
+
+    #     serializer = self.get_serializer(queryset, many=True)
+    #     return Response(serializer.data)
+
+    def get_queryset(self):
+        user = self.request.user
+        teacher = User.objects.get(username=user)
+
+        if user is not None:
+            queryset = Class.objects.filter(teacher=teacher)
+        else:
+            queryset = Class.objects.none()
+        return queryset
+
+    def get_serializer_class(self):
+        # Muda o serializer dependendo da ação.
+        if self.action == 'create':
+            return ClassAddSerializer
+
+        if self.action == 'update':
+            return ClassSerializer
+
+        return ClassSerializer
+
+    def perform_create(self, serializer):
+        user = self.request.user
+        teacher = User.objects.get(username=user)
+
+        if user is not None:
+            serializer.save(teacher=teacher)
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+    def perform_update(self, serializer):
+        user = self.request.user
+        data = self.request.data
+        teacher_id = data.get('teacher')
+
+        try:
+            teacher = User.objects.get(pk=teacher_id)
+        except User.DoesNotExist:
+            raise DRFValidationError('Usuário não encontrado.')
+
+        if user and user.is_authenticated:
+            if user == teacher:
+                serializer.save()
+            else:
+                raise DRFValidationError('Você não tem permissão para esta operação.')
+
+    def retrieve(self, request, *args, **kwargs):
+        '''
+        Método para ver os detalhes.
+        '''
+        instance = self.get_object()
+        teacher = instance.teacher
+        user = self.request.user
+
+        if user and user.is_authenticated:
+            if user == teacher:
+                serializer = self.get_serializer(instance)
+            else:
+                raise DRFValidationError('Você não tem acesso a esta aula.')
+
+        return Response(serializer.data)
+
+    def perform_destroy(self, instance):
+        '''
+        Método para deletar os dados.
+        '''
+        # instance.delete()
+        raise DRFValidationError('Nenhuma aula pode ser deletada.')
